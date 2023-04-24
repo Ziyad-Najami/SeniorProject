@@ -9,21 +9,23 @@ import { ApiService } from '../api.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  addform : any;
+  // addform : any;
+  loginError = false;
+
+  form = new FormGroup({
+   user_name : new FormControl(null, Validators.required),
+   full_name: new FormControl(null, Validators.required),
+   password: new FormControl(null, Validators.required),
+   role: new FormControl(null, Validators.required),
   
+
+  })
+
   constructor(
               private FormBuilder:FormBuilder,
               private router: Router,
               private apiservice : ApiService) 
               {
-                   this.addform = new FormGroup({
-                    user_name : new FormControl(null, Validators.required),
-                    full_name: new FormControl(null, Validators.required),
-                    password: new FormControl(null, Validators.required),
-                    role: new FormControl(null, Validators.required),
-                   
-
-                   })
                 
 
               }
@@ -57,23 +59,26 @@ export class AddUserComponent implements OnInit {
   //}
 
 
-  onSubmit(){
+  onSubmit(myForm : any){
    
-     console.log(this.addform.value)
+     if(myForm.invalid){
+      return;
+    }
+    
 
-     if(this.addform.value.role == 'manager')
+     if(myForm.value.role == 'manager')
      {
-      this.addform.value.role = 1;
+      myForm.value.role = 1;
 
      }
      else
      {
-      this.addform.value.role = 0;
+      myForm.value.role = 0;
 
      }
-     console.log(this.addform.value)
+     
 
-    this.apiservice.addUser(this.addform.value).subscribe(
+    this.apiservice.addUser(myForm.value).subscribe(
       (data:any)=>{
        // console.log(data);
         this.router.navigate(['/home']);  

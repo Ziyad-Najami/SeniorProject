@@ -3,32 +3,52 @@
     <div class="text-center mt-5"><h1>ADD NEW CUSTOMER</h1></div>
     
     <div style="width: 50%; margin: auto">
-        <form [formGroup]="addform" novalidate class="form">
+        <form   (ngSubmit)="onSubmit(myForm)"   #myForm="ngForm">
             
             
             
             <div class="row mt-2">
                 <div class="col-md-6 ">FULL NAME</div>  
-                <div class="col-md-6 "><input required type="text" class="form-control" name="full_name" formControlName="full_name"></div>
+                <div class="col-md-6 "><input required type="text"
+                    #fullname = "ngModel" [ngClass]="{'form-control':true , 'is-valid' : !fullname?.errors && fullname?.touched ,
+                     'is-invalid' : fullname?.touched && fullname?.errors}"
+                    class="form-control" name="full_name" ngModel></div>
                 
             </div>
             
             <div class="row mt-2">
                 
                 <div class="col-md-6 ">ADDRESS</div>  
-                <div class="col-md-6 "><input required type="text" class="form-control" name="address" formControlName="address"></div>
+                <div class="col-md-6 ">
+                    <input required type="text" class="form-control" #address = "ngModel" name="address" ngModel
+                    [ngClass]="{'form-control' : true , 'is-valid' : !address?.errors && address?.touched,
+                     ' is-invalid' : address?.touched && address?.errors }"
+                    >
+                
+                </div>
                 
             </div>
             
             <div class="row mt-2">
                 <div class="col-md-6 ">PHONE NUMBER</div>  
-                <div class="col-md-6 "><input required type="text" name="phone_number" class="form-control" formControlName="phone_number"></div>
+                <div class="col-md-6 ">
+                    <input required type="text" name="phone_number" class="form-control" ngModel [maxlength]="20"
+                    #phonenumber = "ngModel" 
+                    [ngClass]="{'form-control' : true , 'is-valid' : !phonenumber?.errors && phonenumber?.touched ,
+                    'is-invalid' : phonenumber?.errors && phonenumber?.touched}">
+                
+                </div>
                 
             </div>
             
             <div class="row mt-2">
                 <div class="col-md-6 ">EMAIL</div>  
-                <div class="col-md-6 "><input required type="email"  email="true" name="email" class="form-control" formControlName="email"></div>
+                <div class="col-md-6 "><input required type="email" [email]="true"
+                    email="true" name="email" class="form-control" ngModel
+                    #email = "ngModel" [ngClass]="{'form-control' : true, 'is-valid' : email?.touched && !email?.errors,
+                    'is-invalid' : email?.errors && email?.touched
+                }"
+                    ></div>
                 
             </div>
             
@@ -37,8 +57,8 @@
 
             <div class="row mt-2">
                 
-                <div class="col-md-12 text-center"><button class="btn btn-primary" (click)="onSubmit()" type="submit">ADD CUSTOMER</button></div>
-                  
+                <button [disabled]="!myForm.valid" type="submit" class="my-5 btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">ADD Customer</button> 
                 
                 
             </div>

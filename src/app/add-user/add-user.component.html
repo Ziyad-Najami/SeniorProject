@@ -3,35 +3,51 @@
     <div class="text-center mt-5"><h1>ADD NEW USER</h1></div>
     
     <div style="width: 50%; margin: auto">
-        <form [formGroup]="addform" novalidate class="form" #myForm="ngForm">
+        <form (ngSubmit)="onSubmit(myForm)"   #myForm="ngForm">
             
             
             <div class="row mt-2">
                 
                 <div class="col-md-6 ">USERNAME</div>  
-                <div class="col-md-6 "><input type="text" class="form-control" name="user_name" formControlName="user_name"></div>
+                <div class="col-md-6 ">
+                    <input type="text" class="form-control" name="user_name"
+                    ngModel #username = "ngModel" required
+                    [ngClass]="{'form-control' : true ,
+                'is-invalid' : username?.errors && username?.touched, 'is-valid' : !username?.errors && username?.touched
+                }"
+                >
+                </div>
                 
             </div>
            
             <div class="row mt-2">
                 <div class="col-md-6 ">FULL NAME</div>  
-                <div class="col-md-6 "><input type="text" class="form-control" name="full_name" formControlName="full_name"></div>
+                <div class="col-md-6 "><input type="text" class="form-control" name="full_name" 
+                    ngModel #fullname = "ngModel" required
+                    [ngClass]="{'form-control' : true ,
+                'is-invalid' : fullname?.errors && fullname?.touched, 'is-valid' : !fullname?.errors && fullname?.touched
+                }"
+                >
+                </div>
                 
             </div>
            
             
             <div class="row mt-2">
                 <div class="col-md-6 ">Password</div>  
-                <div class="col-md-6 "><input type="password" name="password" class="form-control" formControlName="password"></div>
+                <div class="col-md-6 "><input ngModel type="password" required  #password="ngModel"
+                    [ngClass]="{'form-control': true, 'is-invalid': password?.errors && password?.touched, 'is-valid': !password?.errors && password?.touched}"
+                    name="password" ></div>
                 
             </div>
             
             <div class="row">
                 <div class="col-md-6 ">Role</div>  
-                <div class="col-md-6 text-center">
-                    Manager <input  type="radio" value="manager" name="role" formControlName="role" >   
-                    &#160;&#160;Salesman <input type="radio" value="salesman" name="role" formControlName="role">
-                </div>
+                <div class="col-md-6 text-center" >
+                    Manager <input type="radio" value="manager" name="role" ngModel #role="ngModel">
+                    &#160;&#160;Salesman <input type="radio" value="salesman" name="role" ngModel #role="ngModel">
+                  </div>
+                  
                 
             </div>
             
@@ -39,9 +55,8 @@
         
 
             <div class="row mt-2">
-                
-                <div class="col-md-12 text-center"><button class="btn btn-primary" (click)="onSubmit()" type="submit">ADD STUDENT</button></div>
-                  
+                <button [disabled]="!myForm.valid" type="submit" class="my-5 btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">ADD USER</button>
                 
                 
             </div>

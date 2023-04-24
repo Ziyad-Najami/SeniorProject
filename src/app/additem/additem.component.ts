@@ -32,16 +32,16 @@ export class AdditemComponent implements OnInit {
 
 
 
-  onSubmit(){
+  onSubmit(myForm : any){
    
     console.log(this.addform.value)
 
     
 
-   this.apiservice.addItem(this.addform.value).subscribe(
+   this.apiservice.addItem(myForm.value).subscribe(
      (data:any)=>{
-       console.log(data);
-      // this.router.navigate(['/items']);  
+       //console.log(data);
+       this.router.navigate(['/items']);  
      },  
     error => {  
       alert(error);
