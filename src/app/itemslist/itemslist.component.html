@@ -1,0 +1,48 @@
+<table  class="table table-stripped mt-1 ms-1 ">
+    <thead class="bg-secondary">
+        <th>  ID</th>
+        <th>Description</th>
+        <th>Unit Cost</th>
+        <th>Unit Price</th>
+        <th>Total Sales</th>
+        <th>Total Quantity Sold</th>
+        <th>Quantity in Inventory</th>
+        <th>Delete Item</th>
+
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of ITEMS">
+            <td> <a > <button type="button" class="btn btn-outline-primary">  {{item.id}}  </button> </a> </td>
+            <td>{{item.description}}</td>
+            <td>{{item.unit_cost}}</td>
+            <td>{{item.unit_price}}</td>
+            <td>{{item.total_sales}}</td>
+            <td>{{item.total_qty_sold}}</td>
+            <td>{{item.inventory}}</td>
+            
+            <td>
+                
+                    |
+                <button class="text-danger bg-white" style="border: none;" (click)="deleteItem(item)">DELETE</button>
+                    |
+            
+            </td>
+            
+        </tr>
+
+    </tbody>
+
+    
+
+
+</table>
+
+
+<div class="position-relative">
+    <div class="position-absolute top-10 start-50 translate-middle mt-3">
+        <a routerLink="/addItem">
+            <button type="button" class="btn btn-outline-primary">  Add Items </button>
+        </a>
+    </div>
+</div>

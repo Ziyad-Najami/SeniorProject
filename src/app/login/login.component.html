@@ -1,0 +1,58 @@
+<section class="vh-100 container-fluid Container-w" id="top">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 ">
+            
+            <form (ngSubmit)="onSubmit(myForm)"   #myForm="ngForm">
+          
+              <div *ngIf="loginError" class="alert alert-danger mt-3" role="alert">
+                Login failed. Please check your username and password and try again.
+              </div>
+
+
+             <div class="form-outline mb-4">
+                <label class="form-label" >Enter your Username a: </label>
+                <input type="text"
+                ngModel  #username = "ngModel"
+                required name="username"
+                class="form-control form-control-lg"
+                placeholder="Enter a valid email address"
+                [ngClass]="{'form-control' : true ,
+                'is-invalid' : username?.errors && username?.touched, 'is-valid' : !username?.errors && username?.touched
+                }"
+
+              >
+            </div>
+  
+          
+            <div class="form-outline mb-3">
+                <label class="form-label" >Password : </label>
+                <input ngModel type="password" required  #password="ngModel"
+                [ngClass]="{'form-control': true, 'is-invalid': password?.errors && password?.touched, 'is-valid': !password?.errors && password?.touched}"
+                name="password"
+                  class="form-control form-control-lg"
+                placeholder="Enter password">
+            </div>
+  
+            <button [disabled]="!myForm.valid" type="submit" class="my-5 btn btn-primary btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer
+      id ="footer"
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between footer-ASW py-4 px-4 px-xl-5 bg-primary">
+ 
+      <div class="text-white mb-3 mb-md-0 ">
+        Copyright © 2020. All rights reserved.
+      </div>
+ 
+    
+      
+    </footer>
+</section>

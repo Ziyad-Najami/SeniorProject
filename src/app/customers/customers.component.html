@@ -1,0 +1,48 @@
+<table  class="table table-stripped mt-1 ms-1 ">
+    <thead class="bg-secondary">
+        <th>  ID</th>
+        <th>Full Name</th>
+        <th>Address</th>
+        <th>Total Sales</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        
+        <th>Delete Item</th>
+
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let customer of Customers">
+            <td> <a > <button type="button" class="btn btn-outline-primary">  {{customer.id}}  </button> </a> </td>
+            <td>{{customer.full_name}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.total_sales}}</td>
+            <td>{{customer.phone_number}}</td>
+            <td>{{customer.email}}</td>
+            
+            
+            <td>
+                
+                    |
+                <button class="text-danger bg-white" style="border: none;" (click)="deleteCustomer(customer)">DELETE</button>
+                    |
+            
+            </td>
+            
+        </tr>
+
+    </tbody>
+
+    
+
+
+</table>
+
+
+<div class="position-relative">
+    <div class="position-absolute top-10 start-50 translate-middle mt-3">
+        <a routerLink="/addCustomer">
+            <button type="button" class="btn btn-outline-primary">  Add Customer </button>
+        </a>
+    </div>
+</div>

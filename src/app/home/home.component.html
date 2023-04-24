@@ -1,0 +1,51 @@
+
+<div *ngIf="this.user_role == 'manager'">
+
+    
+    
+    <table  class="table table-stripped mt-1 ms-1 ">
+        <thead class="bg-secondary">
+            <th>  ID</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Full Name</th>
+            <th>Action</th>
+            
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let User of Salesman">
+                <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary">  {{User.id}}  </button> </a> </td>
+                <td>{{User.username}}</td>
+                <td>{{User.password}}</td>
+                <td>{{User.full_name}}</td>
+                
+                <td>
+                    
+                        |
+                    <button class="text-danger bg-white" style="border: none;" (click)="deleteUser(User)">Terminate</button>
+                        |
+                
+                </td>
+                
+            </tr>
+
+        </tbody>
+
+
+    </table>
+
+    <div class="position-relative">
+        <div class="position-absolute top-10 start-50 translate-middle mt-3">
+            <a routerLink="/addUser">
+                <button type="button" class="btn btn-outline-primary">  Add User </button>
+            </a>
+        </div>
+    </div>
+    
+                    
+</div>
+
+
+
+<p *ngIf="this.user_role == 'salesman'">insight works!</p>

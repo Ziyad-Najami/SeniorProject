@@ -1,0 +1,33 @@
+<div class="container">
+
+    <div class="text-center mt-5"><h1>ADD NEW ITEM</h1></div>
+    
+    <div style="width: 50%; margin: auto">
+        <form [formGroup]="addform" novalidate class="form">
+            
+            
+            <div class="row mt-2">
+                
+                <div class="col-md-6 ">Description</div>  
+                <div class="col-md-6 "><input type="text" class="form-control" name="Description" formControlName="Description"></div>
+                
+            </div>
+           
+           
+
+        
+
+            <div class="row mt-4">
+                
+                <div class="col-md-12 text-center"><button class="btn btn-primary" (click)="onSubmit()" type="submit">ADD ITEM</button></div>
+                  
+                
+                
+            </div>
+
+
+        </form>
+    </div>
+    </div>
+        
+    
