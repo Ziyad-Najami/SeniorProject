@@ -56,4 +56,16 @@ export class AuthService {
     }
     return JSON.parse(atob(token.split('.')[1])) as UserModel;
   }
+
+
+
+  logout() {
+    localStorage.removeItem(this.TOKEN_NAME);
+    this._isLoggedIn.next(false);
+    this.user = undefined;
+    this.router.navigate(['/login']);
+  }
+
+
+  
 }

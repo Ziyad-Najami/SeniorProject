@@ -59,6 +59,7 @@ try {
             
             
             $payload = array(
+                "id" => $row['id'],
                 "username" => $username,
                 "role" => $role,
                 "exp" => $exp_time
