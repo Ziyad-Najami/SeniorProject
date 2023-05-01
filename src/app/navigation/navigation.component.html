@@ -1,11 +1,10 @@
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand text-white" routerLink="home">ASW ERP SYSTEM</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" #navToggle (click)="toggleNav()">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -16,34 +15,22 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="customers">Customers</a>
-          
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="purchaseorder">Purchase Order</a>
-          
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="vendors">Vendors</a>
-          
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="items">Items</a>
-          
         </li>
-        
-        
-        
-        
-
-
       </ul>
-      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-white" routerLink="logout">Log Out</a>
+          <button type="button" class="btn btn-primary text-white btn-outline-secondary" (click)="LogOut()">LOG OUT</button>
         </li>
-      </ul> -->
-      <button type="button" class="btn btn-primary text-white btn-outline-secondary" (click)="LogOut()">LOG OUT</button>
-      <!-- <button class="btn btn-light nav-link text-primary" type="button"> Log Out</button> -->
+      </ul>
     </div>
   </div>
 </nav>

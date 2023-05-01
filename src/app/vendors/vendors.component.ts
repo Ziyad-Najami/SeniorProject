@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { writeFile } from 'xlsx';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-vendors',
@@ -25,5 +27,32 @@ export class VendorsComponent implements OnInit {
       this.VENDORS =  this.VENDORS.filter((u:any) => u !== VENDORS1);
     });
 
+  }
+  generateExcel()
+  {
+
+    const rows = [];
+  for (const vendor of this.VENDORS) {
+    rows.push({
+      ID: vendor.id,
+      'Full Name': vendor.full_name,
+      Address: vendor.address,
+      'Total Purchase': vendor.total_purchase,
+      'Phone Number': vendor.phone_number,
+      Email: vendor.email
+    });
+  }
+
+  
+  const worksheet = XLSX.utils.json_to_sheet(rows);
+
+ 
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'VENDORS');
+
+  
+  const filename = 'vendor.xlsx';
+  writeFile(workbook, filename);
+  
   }
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { UserModel } from '../user.model';
 import { ApiService } from '../api.service';
+import { writeFile } from 'xlsx';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-home',
@@ -33,6 +36,33 @@ export class HomeComponent implements OnInit {
     this.apiservice.deleteUser(User.id).subscribe(result => {
       this.Salesman = this.Salesman.filter((u:any) => u !== User);
     })
+
+  }
+
+  generateExcel()
+  {
+
+    const rows = [];
+    for (const user of this.Salesman) {
+      rows.push({
+        ID: user.id,
+        'User Name': user.username,
+        'Full Name': user.full_name,
+        'Password': user.password,
+        'Role': user.role,
+            });
+    }
+  
+    
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+  
+   
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'USERS');
+  
+    
+    const filename = 'user.xlsx';
+    writeFile(workbook, filename);
 
   }
 

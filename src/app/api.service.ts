@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 
 @Injectable({
@@ -96,5 +97,38 @@ export class ApiService {
   addVendor(Vendor : any)
   {
     return this.http.post(this.url+'addvendor.php', Vendor);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //////////////////////////////testing 
+  displayCustomers() {
+    return this.http.get(this.url+'customerslist.php').pipe(
+      map((data: any) => Object.values(data))
+    );
+  }
+  
+
+  getItemstest(): Observable<any> {
+    return this.http.get(this.url+'itemslist.php').pipe(
+      map((data: any) => Object.values(data))
+    );
+  }
+  
+
+  addSalesOrder(salesOrder: any): Observable<any> {
+    return this.http.post(this.url+'addSalesOrder.php', salesOrder);
   }
 }

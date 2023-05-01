@@ -1,0 +1,40 @@
+/* Style for the unchecked checkbox */
+input[type="checkbox"] {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  /* Style for the checked checkbox */
+  input[type="checkbox"]:checked:before {
+    content: "\2714";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #5cb85c;
+    border-radius: 2px;
+    padding: 2px;
+  }
+  
+  /* Style for the label text */
+  .checkbox label {
+    font-weight: normal;
+  }
+  
+  /* Style for the disabled checkbox */
+  input[type="checkbox"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

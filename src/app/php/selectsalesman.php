@@ -33,7 +33,7 @@ if(isset($_GET['id']))
 }
 
 try{
-    $sql = is_numeric($salesman_id) ?"SELECT * FROM `asw_user` WHERE id= '$salesman_id' AND role = 0" :"SELECT * FROM `asw_user` WHERE role = 0";
+    $sql = is_numeric($salesman_id) ?"SELECT * FROM `asw_user` WHERE id= '$salesman_id' AND role = 0" :"SELECT * FROM `asw_user`";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();

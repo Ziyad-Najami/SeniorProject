@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { writeFile } from 'xlsx';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-itemslist',
@@ -29,4 +32,34 @@ export class ItemslistComponent implements OnInit {
 
   }
 
+  generateExcel()
+  {
+
+    const rows = [];
+    for (const item of this.ITEMS) {
+      rows.push({
+        ID: item.id,
+        'Description': item.description,
+        'Unit Cost': item.unit_cost,
+        'Unit Price': item.unit_price,
+        'Total Sales': item.total_sales,
+        'Total Quantity': item.total_qty_sold,
+        Inventory : item.inventory
+      });
+    }
+  
+    
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+  
+   
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'ITEMS');
+  
+    
+    const filename = 'items.xlsx';
+    writeFile(workbook, filename);
+    
+
+
+  }
 }

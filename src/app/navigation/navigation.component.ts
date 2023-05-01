@@ -19,12 +19,16 @@ export class NavigationComponent implements OnInit {
     });
   }
 
+  toggleNav() {
+    const navElement = document.getElementById('navbarNav');
+    if (navElement) {
+      navElement.classList.toggle('show');
+    }
+  }
+
   LogOut() {
     localStorage.removeItem('user_auth');
     this.router.navigate(['/login']);
     this.authService.logout();
-  
-  
   }
-
 }

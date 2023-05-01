@@ -6,6 +6,7 @@
     <table  class="table table-stripped mt-1 ms-1 ">
         <thead class="bg-secondary">
             <th>  ID</th>
+            <th>Role</th>
             <th>User Name</th>
             <th>Password</th>
             <th>Full Name</th>
@@ -16,6 +17,16 @@
         <tbody>
             <tr *ngFor="let User of Salesman">
                 <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary">  {{User.id}}  </button> </a> </td>
+               
+                <td>
+                    <ng-container *ngIf="User.role === 1; else salesman">
+                      Manager
+                    </ng-container>
+                    <ng-template #salesman>
+                      Salesman
+                    </ng-template>
+                  </td>
+                  
                 <td>{{User.username}}</td>
                 <td>{{User.password}}</td>
                 <td>{{User.full_name}}</td>
@@ -39,12 +50,15 @@
         <div class="position-absolute top-10 start-50 translate-middle mt-3">
             <a routerLink="/addUser">
                 <button type="button" class="btn btn-outline-primary">  Add User </button>
-            </a>
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <button class="btn btn-success" (click)="generateExcel()">Export to Excel</button>
+            </div>
         </div>
     </div>
     
                     
-</div>
+
 
 
 

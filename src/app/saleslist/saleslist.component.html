@@ -1,0 +1,94 @@
+<form class="form-horizontal text-center" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+  <h2 class="text-primary">Sales Order</h2>
+
+  <div class="row justify-content-center">
+    
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-sm-6 col-md-1">
+      <label for="customer_id" class="control-label">Customer:</label>
+    </div>
+
+
+    <div class="col-sm-6 col-md-3">
+      <select id="customer_id" name="customer_id" class="form-control"
+        [(ngModel)]="form.controls.customer" #customer="ngModel"
+        [ngClass]="{'form-control':true , 'is-valid' : !customer?.errors && customer?.touched,
+        'is-invalid' : customer?.touched && customer.value.errors}"
+        required>
+
+        <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.full_name }}</option>
+      </select>
+    </div>
+
+
+    <div class="col-sm-6 col-md-1">
+      <label for="user_id" class="control-label">User:</label>
+    </div>
+
+    <div class="col-sm-6 col-md-2">
+      <input type="text" id="user_id" name="user_id" class="form-control" [(ngModel)]="loggedInUser.username" #userid="ngModel" ngModel readonly>
+    </div>
+
+    <div class="col-sm-6 col-md-1">
+      <label for="posting_date" class="control-label">Posting Date:</label>
+    </div>
+
+    <div class="col-sm-6 col-md-2">
+      <input type="date" id="posting_date" name="posting_date" class="form-control" [(ngModel)]="today" #date="ngModel" ngModel readonly>
+    </div>
+
+    <div class="col-sm-6 col-md-1">
+      <label for="checkbox">Status </label>
+    </div>
+
+    <div class="col-sm-offset-2 col-sm-6 col-md-1 text-center">
+      <input type="checkbox" id="status" name="status" style="margin-left: auto; margin-right: auto;" class="status-checkbox"
+        #status="ngModel" [ngModel]="false"
+        [ngClass]="{'form-control': true, 'is-valid': status.touched && !status.errors?.['required'], 'is-invalid': status.touched && status.errors?.['required']}"
+        [required]="true" requiredTrue>
+    </div>
+
+
+
+  </div>
+
+  <div *ngFor="let line of lines; let i = index" class="form-group justify-content-center mt-2">
+    <div class="row">
+    <label class="col-sm- col-md-1 control-label">Product:</label>
+
+    <div class="col-sm-5 col-md-5">
+      <select name="product_id{{i}}" class="form-control" [(ngModel)]="line.product_id">
+        <option value="">Select a product...</option>
+        <option *ngFor="let item of items" [value]="item.id">{{ item.description }}</option>
+      </select>
+    </div>
+
+    <label class="col-sm-1 col-md-1 control-label">Quantity:</label>
+    
+    <div class="col-sm-4 col-md-4">
+      <input type="number" name="quantity{{i}}" class="form-control" [(ngModel)]="line.quantity">
+    </div>
+    
+    <div class="col-sm-1 col-md-1">
+      <button type="button" class="btn btn-danger" (click)="removeLine(i)">Remove</button>
+    </div>
+  
+  </div>
+  </div>
+
+
+  <div class=" row form-group justify-content-center mt-2">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button type="button" class="btn btn-secondary" (click)="addLine()">Add Line</button>
+    </div>
+  
+    <div class="col-sm-offset-2 col-sm-6">
+      <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary">Post</button>
+    </div>
+  </div>
+
+
+</form>

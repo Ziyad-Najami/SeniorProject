@@ -1,0 +1,14 @@
+.Main_dev {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0%;
+  
+    margin: 10px 10px 0px 0px;
+
+}
