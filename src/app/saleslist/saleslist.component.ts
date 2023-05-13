@@ -82,7 +82,7 @@ export class SaleslistComponent implements OnInit {
 
 
   onSubmit(form: any) {
-    console.log(form.form.controls.vendor);
+    console.log(form.form);
     
     // const salesOrderData = {
     //   customer_id: form.customer_id,
