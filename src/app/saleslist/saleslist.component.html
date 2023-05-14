@@ -14,10 +14,10 @@
 
     <div class="col-sm-6 col-md-3">
       <select id="customer_id" name="customer_id" class="form-control"
-        [(ngModel)]="form.controls.customer" #customer="ngModel"
-        [ngClass]="{'form-control':true , 'is-valid' : !customer?.errors && customer?.touched,
-        'is-invalid' : customer?.touched && customer.value.errors}"
-        required>
+        [(ngModel)]="form.controls.customer" #customer="ngModel" 
+        [ngClass]="{'form-control':true , 'is-valid' : !customer?.errors && customer?.touched,'is-invalid' : customer?.touched && customer.value.errors}"
+        
+        [required]="true" requiredTrue>
 
         <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.full_name }}</option>
       </select>
@@ -57,19 +57,30 @@
 
   <div *ngFor="let line of lines; let i = index" class="form-group justify-content-center mt-2">
     <div class="row">
-    <label class="col-sm- col-md-1 control-label">Product:</label>
+    <label class="col-sm-1 col-md-1 control-label">Product:</label>
 
-    <div class="col-sm-5 col-md-5">
+    <div class="col-sm-3 col-md-3">
       <select name="product_id{{i}}" class="form-control" [(ngModel)]="line.product_id">
-        <option value="">Select a product...</option>
+        
         <option *ngFor="let item of items" [value]="item.id">{{ item.description }}</option>
       </select>
     </div>
 
+    <label class="col-sm-1 col-md-1 control-label">Price :</label>
+    <div class="col-sm-3 col-md-3">
+
+      <input type="number" name="product_price{{i}}" class="form-control" [(ngModel)]="line.product_price">
+
+
+    </div>
+ 
+ 
+ 
+ 
     <label class="col-sm-1 col-md-1 control-label">Quantity:</label>
     
-    <div class="col-sm-4 col-md-4">
-      <input type="number" name="quantity{{i}}" class="form-control" [(ngModel)]="line.quantity">
+    <div class="col-sm-2 col-md-2">
+      <input type="number" name="quantity{{i}}" class="form-control" [(ngModel)]="line.quantity"> 
     </div>
     
     <div class="col-sm-1 col-md-1">
@@ -86,7 +97,8 @@
     </div>
   
     <div class="col-sm-offset-2 col-sm-6">
-      <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary">Post</button>
+      <button [disabled]="!myForm.valid || !status.touched || !customer.touched || customer.value.errors" type="submit" class="btn btn-primary">Post</button>
+
     </div>
   </div>
 

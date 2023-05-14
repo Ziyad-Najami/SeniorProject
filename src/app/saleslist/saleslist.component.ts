@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { DatePipe } from '@angular/common';
 import { FormGroup , FormControl  } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { delay } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-saleslist',
   templateUrl: './saleslist.component.html',
@@ -13,21 +15,26 @@ import { Validators } from '@angular/forms';
 export class SaleslistComponent implements OnInit {
   customers: any[];
   items: any[];
-  lines: { product_id: number | null, quantity: number | null }[] = [];
+  lines: { product_id: number | null, quantity: number | null  , product_price : number | null}[] = [];
   loggedInUser : any;
   today: any;
   Date = new Date();
+  lineCounter : number  = 0 ;
+  headerID : number = 0;
+
+
 
   form = new FormGroup({
     customer: new FormControl(null, Validators.required),
     status: new FormControl(null, Validators.required),
     userid: new FormControl(null, Validators.required),
     date: new FormControl(null, [Validators.required]),
+    line: new FormControl(null, [Validators.required]),
   })
   
 
 
-  constructor(private apiService: ApiService , private AuthService: AuthService, private datePipe: DatePipe) {
+  constructor(private apiService: ApiService , private AuthService: AuthService, private datePipe: DatePipe , private router : Router) {
     this.customers = [];
     this.items = [];
     this.lines = [];
@@ -44,7 +51,7 @@ export class SaleslistComponent implements OnInit {
     this.getItems();
     this.today = this.datePipe.transform(this.Date, 'yyyy-MM-dd');
     this.loggedInUser = this.AuthService.user;
-    console.log(this.today);
+    // console.log(this.today);
   }
 
   getCustomers() {
@@ -82,31 +89,100 @@ export class SaleslistComponent implements OnInit {
 
 
   onSubmit(form: any) {
-    console.log(form.form);
+   
     
-    // const salesOrderData = {
-    //   customer_id: form.customer_id,
-    //   user_id: this.AuthService.user..id,
-    //   posting_date: this.today,
-    //   status: form.status
-    // };
-    // const salesOrderLines = this.lines?.map(line => ({
-    //   product_id: line.product_id,
-    //   quantity: line.quantity
-    // }));
-    // const salesOrder = { sales_order: salesOrderData, sales_order_lines: salesOrderLines };
-    // console.log(salesOrder);
+    //customer_id , user_id , posting_date , status
+
+    
+    //INSERT THE HEADER FIRST 
+    
+    const salesOrderHeaderData = {
+      customer_id: form.form.controls.customer_id.value,
+      user_id: this.loggedInUser.id,
+      posting_date: this.today,
+      status: form.status
+    };
+
+    this.apiService.addSalesOrderHeader(salesOrderHeaderData).subscribe(
+      (data:any)=>{
+        this.headerID = data.header.id
+        console.log(this.headerID);
+        
+        
+      },  
+      error => {  
+        alert(error);
+      });
+      
+      
+      //lineCounter
+      
+      delay(500000);
+    
+
+
+setTimeout(() => {
+  
+
+
+  for (let i = 0; i < this.lineCounter; i++) { 
+  
+  const salesOrderLines = this.lines?.map(line => ({
+    order_id : this.headerID,
+    product_id: line.product_id,
+    product_price: line.product_price,
+    quantity: line.quantity
+  }));
+  
+  const editItem = 
+  {
+    unit_price: salesOrderLines[i].product_price,
+    quantity: salesOrderLines[i].quantity
+  
+  
   }
+  
+  console.log(salesOrderLines[i]);
+  this.apiService.addSalesOrderLine(salesOrderLines[i]).subscribe(
+  (data:any)=>{
+    console.log('Sales order line added successfully:', data);
+  },  
+  error => {  
+    console.error('Error adding sales order line:', error);
+  }
+  );
+  
+  
+  //ITEM UPDATE
+  
+  
+  }
+
+}, 1000);
+    // console.log(salesOrderHeaderData);
+
+    
+
+    this.router.navigate(['/items']);
+
+
+
+//CUSTOMER UPDATE
+
+  }  
+
   
 
 
   addLine() {
-    const newLine = { product_id: null, quantity: null };
+    const newLine = { product_id: null, quantity: null  , product_price : null};
     // console.log(newLine);
     this.lines?.push(newLine);
+    this.lineCounter = this.lineCounter + 1;
   }
   
   removeLine(index: number) {
     this.lines?.splice(index, 1);
+    this.lineCounter = this.lineCounter - 1;
   }
 }

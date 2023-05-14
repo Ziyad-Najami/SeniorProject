@@ -4,6 +4,9 @@ import { AuthService } from '../auth.service';
 import { DatePipe } from '@angular/common';
 import { FormGroup , FormControl  } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { delay } from 'rxjs';
+import { waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-purchaselist',
   templateUrl: './purchaselist.component.html',
@@ -14,21 +17,24 @@ export class PurchaselistComponent implements OnInit {
   
   vendors: any[];
   items: any[];
-  lines: { product_id: number | null, quantity: number | null }[] = [];
+  lines: { product_id: number | null, quantity: number | null  , product_cost : number | null}[] = [];
   loggedInUser : any;
   today: any;
   Date = new Date();
+  lineCounter : number  = 0 ;
+  headerID : number = 0;
 
   form = new FormGroup({
     vendor: new FormControl(null, Validators.required),
     status: new FormControl(null, Validators.required),
     userid: new FormControl(null, Validators.required),
     date: new FormControl(null, [Validators.required]),
+    lines: new FormControl(null, [Validators.required]),
   })
   
 
 
-  constructor(private apiService: ApiService , private AuthService: AuthService, private datePipe: DatePipe) {
+  constructor(private apiService: ApiService , private AuthService: AuthService, private datePipe: DatePipe , private router : Router) {
     this.vendors = [];
     this.items = [];
     this.lines = [];
@@ -73,34 +79,105 @@ export class PurchaselistComponent implements OnInit {
   }
 
 
-  onSubmit(form: any) {
-    console.log(form.form.controls);
+  onSubmit(form: any){
+   
+    //console.log(form.form.controls);
+    //customer_id , user_id , posting_date , status
+
+    
+    //INSERT THE HEADER FIRST 
+    
+    const purchOrderHeaderData = {
+      vendor: form.form.controls.vendor.value,
+      user_id: this.loggedInUser.id,
+      posting_date: this.today,
+      status: form.status
+    };
+    console.log(purchOrderHeaderData);
+
+    this.apiService.addPurchOrderHeader(purchOrderHeaderData).subscribe(
+      (data:any)=>{
+        this.headerID = data.header.id
+        console.log(this.headerID);
+        
+          
+      },  
+     error => {  
+       alert(error);
+     });
+
+    
+    //lineCounter
+    
     
 
-    // const salesOrderData = {
-    //   customer_id: form.customer_id,
-    //   user_id: this.AuthService.user..id,
-    //   posting_date: this.today,
-    //   status: form.status
-    // };
-    // const salesOrderLines = this.lines?.map(line => ({
-    //   product_id: line.product_id,
-    //   quantity: line.quantity
-    // }));
-    // const salesOrder = { sales_order: salesOrderData, sales_order_lines: salesOrderLines };
-    // console.log(salesOrder);
+
+
+    setTimeout(() => {
+      
+      for (let i = 0; i < this.lineCounter; i++) { 
+  
+      const purchOrderLines = this.lines?.map(line => ({
+        order_id : this.headerID,
+        product_id: line.product_id,
+        product_cost: line.product_cost,
+        quantity: line.quantity
+      }));
+  
+      // const editItem = 
+      // {
+      //   unit_cost: purchOrderLines[i].product_cost,
+      //   quantity: purchOrderLines[i].quantity
+  
+  
+      // }
+      
+      console.log(purchOrderLines[i]);
+    this.apiService.addPurchOrderLine(purchOrderLines[i]).subscribe(
+      (data:any)=>{
+        console.log('Sales order line added successfully:', data);
+      },  
+      error => {  
+        console.error('Error adding sales order line:', error);
+      }
+    );
+  
+    
+    ///ITEM UPDATE
+  
+    
   }
+  
+  
+}, 1000);
+
+this.router.navigate(['/items']);
+    
+
+
+
+
+
+//CUSTOMER UPDATE
+
+
+
+  }  
 
 
 
   addLine() {
-    const newLine = { product_id: null, quantity: null };
+    const newLine = { product_id: null, quantity: null  , product_cost : null};
     // console.log(newLine);
     this.lines?.push(newLine);
+    this.lineCounter = this.lineCounter + 1;
+    // console.log(this.lineCounter);
   }
   
   removeLine(index: number) {
     this.lines?.splice(index, 1);
+    this.lineCounter = this.lineCounter - 1;
+    // console.log(this.lineCounter);
   }
 
 }

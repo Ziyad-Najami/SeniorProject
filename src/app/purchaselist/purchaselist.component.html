@@ -64,18 +64,26 @@
 
   <div *ngFor="let line of lines; let i = index" class="form-group justify-content-center mt-2">
     <div class="row">
-    <label class="col-sm- col-md-1 control-label">Product:</label>
+    <label class="col-sm-1 col-md-1 control-label">Product:</label>
 
-    <div class="col-sm-5 col-md-5">
+    <div class="col-sm-3 col-md-3">
       <select name="product_id{{i}}" class="form-control" [(ngModel)]="line.product_id">
-        <option value="">Select a product...</option>
+        
         <option *ngFor="let item of items" [value]="item.id">{{ item.description }}</option>
       </select>
     </div>
 
+    <label class="col-sm-1 col-md-1 control-label">Price :</label>
+    <div class="col-sm-3 col-md-3">
+
+      <input type="number" name="product_price{{i}}" class="form-control" [(ngModel)]="line.product_cost">
+
+
+    </div>
+
     <label class="col-sm-1 col-md-1 control-label">Quantity:</label>
     
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-2 col-md-2">
       <input type="number" name="quantity{{i}}" class="form-control" [(ngModel)]="line.quantity">
     </div>
     

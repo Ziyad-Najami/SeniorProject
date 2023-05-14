@@ -100,20 +100,46 @@ export class ApiService {
   }
 
 
+  ////////////////////////////////////////////////////////////////////////////////////////
+  /////                          Sales Order API                                     /////
+  ////////////////////////////////////////////////////////////////////////////////////////
+
+  addSalesOrderHeader(salesHeader : any)
+  {
+    return this.http.post(this.url+'addSalesHeader.php', salesHeader);
+
+  }
+
+  addSalesOrderLine(salesLine : any)
+  {
+
+  return this.http.post(this.url+'addSalesLine.php', salesLine);
+
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  /////                          Purch Order API                                     /////
+  ////////////////////////////////////////////////////////////////////////////////////////
+
+
+  addPurchOrderHeader(PurchHeader : any)
+  {
+    console.log(PurchHeader);
+    return this.http.post(this.url+'addPurchOrderHeader.php', PurchHeader);
+
+  }
+
+  addPurchOrderLine(PurchLine : any)
+  {
+    console.log(PurchLine);
+  return this.http.post(this.url+'addPurchOrderLine.php', PurchLine);
+
+  }
 
 
 
 
-
-
-
-
-
-
-
-
-
-  //////////////////////////////testing 
+  //////////////////////////////testing ////////////////////////////////////////////////////////////
   displayCustomers() {
     return this.http.get(this.url+'customerslist.php').pipe(
       map((data: any) => Object.values(data))
