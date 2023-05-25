@@ -1,5 +1,6 @@
 
 <div *ngIf="this.user_role == 'manager'">
+     <p>Welcome, {{LoggedInUser}}!</p> <!-- 3m jeb l user l 3ml log in  Kormal twl3a css-->
 
     
     
@@ -61,5 +62,52 @@
 
 
 
+<!-- here is the form that appears for the salesman user -->
+<div *ngIf="user_role === 'salesman'" class="salesman-dashboard">
+    <div class="row text-center">
+      <div class="col-12">
+        <h2>Salesman Dashboard</h2>
+        <p>Welcome, {{ LoggedInUser }}!</p>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h3>Items with Least Quantity Sold</h3>
+          </div>
+          <div class="card-body">
+            <ul>
+             
+                {{ leastQuantitySoldItems.description }} - Quantity Sold: {{ leastQuantitySoldItems.total_sales }}
+              
+            </ul>
+            <div *ngIf="!leastQuantitySoldItems">
+              No items found.
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h3>Items with Highest Inventory</h3>
+          </div>
+          <div class="card-body">
+            <ul>
+             
+                {{ highestInventoryItems.description }} - Inventory: {{ highestInventoryItems.inventory }}
+            
+            </ul>
+            <div *ngIf="!highestInventoryItems">
+              No items found.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
-<p *ngIf="this.user_role == 'salesman'">insight works!</p>

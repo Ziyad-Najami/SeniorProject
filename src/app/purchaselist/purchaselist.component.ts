@@ -4,14 +4,13 @@ import { AuthService } from '../auth.service';
 import { DatePipe } from '@angular/common';
 import { FormGroup , FormControl  } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { delay } from 'rxjs';
-import { waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-purchaselist',
   templateUrl: './purchaselist.component.html',
   styleUrls: ['./purchaselist.component.css'],
   providers: [DatePipe]
+
 })
 export class PurchaselistComponent implements OnInit {
   

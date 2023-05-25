@@ -157,4 +157,19 @@ export class ApiService {
   addSalesOrder(salesOrder: any): Observable<any> {
     return this.http.post(this.url+'addSalesOrder.php', salesOrder);
   }
+
+  ////////////////////////////////////////////SalesMan Insights //////////////////////////////////////////
+
+  getItemsWithLeastQuantitySold() 
+  {
+    return this.http.get(this.url+'LeastItemSold.php');
+
+
+  }
+
+  getItemsWithHighestInventory()
+  {
+    return this.http.get(this.url+'HighestItemQty.php');
+
+  }
 }
