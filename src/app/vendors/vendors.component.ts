@@ -26,6 +26,7 @@ export class VendorsComponent implements OnInit {
     this.apiService.deleteVendor(VENDORS1.id).subscribe((response : any) => {
       this.VENDORS =  this.VENDORS.filter((u:any) => u !== VENDORS1);
     });
+    console.log(VENDORS1.id)
 
   }
   generateExcel()

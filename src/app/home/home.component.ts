@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   Salesman: any;
 
-  constructor(private authserv: AuthService, private apiservice: ApiService) {}
+  constructor(private authserv: AuthService, private apiservice: ApiService) { }
 
   ngOnInit(): void {
     this.token_payload = JSON.parse(atob(this.authserv.token.split('.')[1]));

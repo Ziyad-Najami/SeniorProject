@@ -89,4 +89,11 @@ export class AddUserComponent implements OnInit {
 
   }
 
+
+  preventWhiteSpace(event: KeyboardEvent) {
+    if (event.key === ' ' ) {
+        event.preventDefault();
+    }
+}
+
 }

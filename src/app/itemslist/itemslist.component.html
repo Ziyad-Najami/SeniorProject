@@ -1,13 +1,13 @@
 <table  class="table table-stripped mt-1 ms-1 ">
-    <thead class="bg-secondary">
-        <th>  ID</th>
-        <th>Description</th>
-        <th>Unit Cost</th>
-        <th>Unit Price</th>
-        <th>Total Sales</th>
-        <th>Total Quantity Sold</th>
-        <th>Quantity in Inventory</th>
-        <th>Delete Item</th>
+    <thead class="bg-dark h-50">
+        <th class="text-white">  ID</th>
+        <th class="text-white">Description</th>
+        <th class="text-white">Unit Cost</th>
+        <th class="text-white">Unit Price</th>
+        <th class="text-white">Total Sales</th>
+        <th class="text-white">Total Quantity Sold</th>
+        <th class="text-white">Quantity in Inventory</th>
+        <th class="text-white">Delete Item</th>
 
     </thead>
 
@@ -21,7 +21,7 @@
             <td>{{item.total_qty_sold}}</td>
             <td>{{item.inventory}}</td>
             
-            <td>
+            <td class="border-left-1">
                 
                     |
                 <button class="text-danger bg-white" style="border: none;" (click)="deleteItem(item)">DELETE</button>

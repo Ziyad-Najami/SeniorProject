@@ -1,13 +1,13 @@
 <div class="container">
 
-    <div class="text-center mt-5"><h1>ADD NEW CUSTOMER</h1></div>
+    <div class="text-center m-5"><h1>ADD NEW CUSTOMER</h1></div>
     
     <div style="width: 50%; margin: auto">
         <form   (ngSubmit)="onSubmit(myForm)"   #myForm="ngForm">
             
             
             
-            <div class="row mt-2">
+            <div class="row mt-3 mb-3">
                 <div class="col-md-6 ">FULL NAME</div>  
                 <div class="col-md-6 "><input required type="text"
                     #fullname = "ngModel" [ngClass]="{'form-control':true , 'is-valid' : !fullname?.errors && fullname?.touched ,
@@ -16,7 +16,7 @@
                 
             </div>
             
-            <div class="row mt-2">
+            <div class="row mt-3 mb-3">
                 
                 <div class="col-md-6 ">ADDRESS</div>  
                 <div class="col-md-6 ">
@@ -29,7 +29,7 @@
                 
             </div>
             
-            <div class="row mt-2">
+            <div class="row mt-3 mb-3">
                 <div class="col-md-6 ">PHONE NUMBER</div>  
                 <div class="col-md-6 ">
                     <input required type="text" name="phone_number" class="form-control" ngModel [maxlength]="20"
@@ -41,7 +41,7 @@
                 
             </div>
             
-            <div class="row mt-2">
+            <div class="row mt-3 mb-3">
                 <div class="col-md-6 ">EMAIL</div>  
                 <div class="col-md-6 "><input required type="email" [email]="true"
                     email="true" name="email" class="form-control" ngModel

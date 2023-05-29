@@ -1,0 +1,40 @@
+.custom-card {
+    background-color: rgb(19, 19, 239);
+    color: rgb(0, 0, 0);
+  }
+  .salesman-dashboard {
+    padding: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .welcome-message {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    background-color: #2d49e8;
+    padding: 10px;
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .no-items-found {
+    color: red;
+  }
+  
+  .custom-card {
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  

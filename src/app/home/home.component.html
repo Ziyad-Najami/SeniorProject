@@ -1,113 +1,120 @@
-
 <div *ngIf="this.user_role == 'manager'">
-     <p>Welcome, {{LoggedInUser}}!</p> <!-- 3m jeb l user l 3ml log in  Kormal twl3a css-->
+  
+  <table class="table table-stripped mt-1 ms-1 ">
+    <thead class="bg-dark h-50">
+      <th class="text-white"> ID</th>
+      <th class="text-white">Role</th>
+      <th class="text-white">User Name</th>
+      <th class="text-white">Password</th>
+      <th class="text-white">Full Name</th>
+      <th class="text-white">Action</th>
 
-    
-    
-    <table  class="table table-stripped mt-1 ms-1 ">
-        <thead class="bg-secondary">
-            <th>  ID</th>
-            <th>Role</th>
-            <th>User Name</th>
-            <th>Password</th>
-            <th>Full Name</th>
-            <th>Action</th>
-            
-        </thead>
+    </thead>
 
-        <tbody>
-            <tr *ngFor="let User of Salesman">
-                <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary">  {{User.id}}  </button> </a> </td>
-               
-                <td>
-                    <ng-container *ngIf="User.role === 1; else salesman">
-                      Manager
-                    </ng-container>
-                    <ng-template #salesman>
-                      Salesman
-                    </ng-template>
-                  </td>
-                  
-                <td>{{User.username}}</td>
-                <td>{{User.password}}</td>
-                <td>{{User.full_name}}</td>
-                
-                <td>
-                    
-                        |
-                    <button class="text-danger bg-white" style="border: none;" (click)="deleteUser(User)">Terminate</button>
-                        |
-                
-                </td>
-                
-            </tr>
+    <tbody>
+      <tr *ngFor="let User of Salesman">
+        <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary"> {{User.id}}
+            </button> </a> </td>
 
-        </tbody>
+        <td>
+          <ng-container *ngIf="User.role === 1; else salesman">
+            Manager
+          </ng-container>
+          <ng-template #salesman>
+            Salesman
+          </ng-template>
+        </td>
+
+        <td>{{User.username}}</td>
+        <td >{{User.password}}</td>
+        <td>{{User.full_name}}</td>
+
+        <td>
+
+          |
+          <button class="text-danger bg-white" style="border: none;" (click)="deleteUser(User)">Terminate</button>
+          |
+
+        </td>
+
+      </tr>
+
+    </tbody>
 
 
-    </table>
+  </table>
 
-    <div class="position-relative">
-        <div class="position-absolute top-10 start-50 translate-middle mt-3">
-            <a routerLink="/addUser">
-                <button type="button" class="btn btn-outline-primary">  Add User </button>
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="position-relative">
+    <div class="position-absolute top-10 start-50 translate-middle mt-3">
+      <a routerLink="/addUser">
+        <button type="button" class="btn btn-outline-primary"> Add User </button>
+      </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <button class="btn btn-success" (click)="generateExcel()">Export to Excel</button>
-            </div>
-        </div>
+      <button class="btn btn-success" (click)="generateExcel()">Export to Excel</button>
     </div>
-    
-                    
+  </div>
+</div>
+
+
 
 
 
 <!-- here is the form that appears for the salesman user -->
 <div *ngIf="user_role === 'salesman'" class="salesman-dashboard">
-    <div class="row text-center">
-      <div class="col-12">
-        <h2>Salesman Dashboard</h2>
-        <p>Welcome, {{ LoggedInUser }}!</p>
-      </div>
+  <div class="row text-center">
+    <div class="col-12">
+      <h2 class="dashboard-title">Salesman Dashboard</h2>
+      <p class="welcome-message">Welcome, {{ LoggedInUser }}!</p>
     </div>
-  
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            <h3>Items with Least Quantity Sold</h3>
-          </div>
-          <div class="card-body">
-            <ul>
-             
-                {{ leastQuantitySoldItems.description }} - Quantity Sold: {{ leastQuantitySoldItems.total_sales }}
-              
-            </ul>
-            <div *ngIf="!leastQuantitySoldItems">
-              No items found.
-            </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Items with Least Quantity Sold</h3>
+        </div>
+        <div class="card-body">
+          <ul>
+            {{ leastQuantitySoldItems.description }} - Quantity Sold: {{ leastQuantitySoldItems.total_sales }}
+          </ul>
+          <div *ngIf="!leastQuantitySoldItems" class="no-items-found">
+            No items found.
           </div>
         </div>
       </div>
-  
-      <div class="col-md-6 col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            <h3>Items with Highest Inventory</h3>
-          </div>
-          <div class="card-body">
-            <ul>
-             
-                {{ highestInventoryItems.description }} - Inventory: {{ highestInventoryItems.inventory }}
-            
-            </ul>
-            <div *ngIf="!highestInventoryItems">
-              No items found.
-            </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Items with Highest Inventory</h3>
+        </div>
+
+        <div class="card-body">
+          <ul>
+            {{ highestInventoryItems.description }} - Inventory: {{ highestInventoryItems.inventory }}
+          </ul>
+        
+          <div *ngIf="!highestInventoryItems" class="no-items-found">
+            No items found.
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>New Insight Feature Coming Soon!</h3>
+        </div>
+
+        <div class="card-body">
+          <p>Stay tuned for exciting new insights and updates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -90,7 +90,13 @@ export class SaleslistComponent implements OnInit {
 
   onSubmit(form: any) {
    
-    
+    if (this.lineCounter == 0){
+      console.log(this.lineCounter);
+
+      alert("You are Posting a Sales Invoice without having Sales Lines");
+      
+    }
+    else{
     //customer_id , user_id , posting_date , status
 
     
@@ -121,7 +127,7 @@ export class SaleslistComponent implements OnInit {
     
 
 
-setTimeout(() => {
+ setTimeout(() => {
   
 
 
@@ -168,6 +174,7 @@ setTimeout(() => {
 
 
 //CUSTOMER UPDATE
+    }
 
   }  
 

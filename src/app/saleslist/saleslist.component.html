@@ -1,9 +1,9 @@
 <form class="form-horizontal text-center" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
   <h2 class="text-primary">Sales Order</h2>
 
-  <div class="row justify-content-center">
-    
-  </div>
+  <!-- <div class="row justify-content-center"> -->
+<!--     
+  </div> -->
 
   <div class="row justify-content-center">
 
@@ -43,17 +43,17 @@
     <div class="col-sm-6 col-md-1">
       <label for="checkbox">Status </label>
     </div>
-
     <div class="col-sm-offset-2 col-sm-6 col-md-1 text-center">
       <input type="checkbox" id="status" name="status" style="margin-left: auto; margin-right: auto;" class="status-checkbox"
-        #status="ngModel" [ngModel]="false"
-        [ngClass]="{'form-control': true, 'is-valid': status.touched && !status.errors?.['required'], 'is-invalid': status.touched && status.errors?.['required']}"
-        [required]="true" requiredTrue>
+      #status="ngModel" [ngModel]="false"
+      [ngClass]="{'form-control': true, 'is-valid': status.touched && !status.errors?.['required'], 'is-invalid': status.touched && status.errors?.['required']}"
+      [required]="true" requiredTrue>
     </div>
-
-
-
+    
+    
+    
   </div>
+  <hr class="mt-5"/>
 
   <div *ngFor="let line of lines; let i = index" class="form-group justify-content-center mt-2">
     <div class="row">

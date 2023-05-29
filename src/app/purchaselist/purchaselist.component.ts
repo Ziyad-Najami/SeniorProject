@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { DatePipe } from '@angular/common';
@@ -82,17 +82,24 @@ export class PurchaselistComponent implements OnInit {
    
     //console.log(form.form.controls);
     //customer_id , user_id , posting_date , status
-
     
+    if (this.lineCounter == 0){
+      console.log(this.lineCounter);
+
+      alert("You are Posting a Purchase Invoice without having Purchase Lines");
+      
+    }
+    else{
+      
     //INSERT THE HEADER FIRST 
     
-    const purchOrderHeaderData = {
-      vendor: form.form.controls.vendor.value,
-      user_id: this.loggedInUser.id,
-      posting_date: this.today,
-      status: form.status
-    };
-    console.log(purchOrderHeaderData);
+          const purchOrderHeaderData = {
+            vendor: form.form.controls.vendor.value,
+            user_id: this.loggedInUser.id,
+            posting_date: this.today,
+            status: form.status
+          };
+    // console.log(purchOrderHeaderData);
 
     this.apiService.addPurchOrderHeader(purchOrderHeaderData).subscribe(
       (data:any)=>{
@@ -159,7 +166,7 @@ this.router.navigate(['/items']);
 
 //CUSTOMER UPDATE
 
-
+}
 
   }  
 

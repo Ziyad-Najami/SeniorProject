@@ -22,12 +22,15 @@ export class CustomersComponent implements OnInit {
   }
 
 
-  deleteCustomer(Customer : any) 
-  {
-    this.apiService.deleteCustomer(Customer.id).subscribe((response : any) => {
-      this.Customers =  this.Customers.filter((u:any) => u !== Customer);
-    });
+  deleteCustomer(customer: any) {
+    const confirmDelete = confirm('Are you sure you want to delete this customer?');
+    if (confirmDelete) {
+      this.apiService.deleteCustomer(customer.id).subscribe((response: any) => {
+        this.Customers = this.Customers.filter((c: any) => c !== customer);
+      });
+    }
   }
+  
 
 
 

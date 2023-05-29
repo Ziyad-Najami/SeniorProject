@@ -1,18 +1,18 @@
-<table  class="table table-stripped mt-1 ms-1 ">
-    <thead class="bg-secondary">
-        <th>  ID</th>
-        <th>Full Name</th>
-        <th>Address</th>
-        <th>Total Sales</th>
-        <th>Phone Number</th>
-        <th>Email</th>
+<table  class="table  mt-1 ms-1 ">
+    <thead class="bg-dark">
+        <th class="text-white" >  ID</th>
+        <th class="text-white">Full Name</th>
+        <th class="text-white">Address</th>
+        <th class="text-white">Total Sales</th>
+        <th class="text-white">Phone Number</th>
+        <th class="text-white">Email</th>
         
         <th>Delete Item</th>
 
     </thead>
 
     <tbody>
-        <tr *ngFor="let customer of Customers">
+        <tr *ngFor="let customer of Customers" class="table-body">
             <td> <a > <button type="button" class="btn btn-outline-primary">  {{customer.id}}  </button> </a> </td>
             <td>{{customer.full_name}}</td>
             <td>{{customer.address}}</td>
@@ -21,7 +21,7 @@
             <td>{{customer.email}}</td>
             
             
-            <td>
+            <td class=" border-left-1 border-top-0 border-bottom-0 border-right-0 border-dark">
                 
                     |
                 <button class="text-danger bg-white" style="border: none;" (click)="deleteCustomer(customer)">DELETE</button>
