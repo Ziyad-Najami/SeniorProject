@@ -51,9 +51,8 @@
       <label for="checkbox">Status </label>
     </div>
 
-    <div class="col-sm-offset-2 col-sm-6 col-md-1 text-center">
-      <input type="checkbox" id="status" name="status" style="margin-left: auto; margin-right: auto;" class="status-checkbox"
-        #status="ngModel" [ngModel]="false"
+    <div class=" col-sm-offset-2 col-sm-6 col-md-1 ">
+      <input type="checkbox" id="status" name="status" style="margin-left: auto; margin-right: auto;" class="status-checkbox" #status="ngModel" [ngModel]="false"
         [ngClass]="{'form-control': true, 'is-valid': status.touched && !status.errors?.['required'], 'is-invalid': status.touched && status.errors?.['required'] }"
         [required]="true" requiredTrue>
     </div>

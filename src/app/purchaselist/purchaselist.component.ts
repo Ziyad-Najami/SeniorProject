@@ -138,35 +138,35 @@ export class PurchaselistComponent implements OnInit {
   
       // }
       
-      console.log(purchOrderLines[i]);
-    this.apiService.addPurchOrderLine(purchOrderLines[i]).subscribe(
-      (data:any)=>{
-        console.log('Sales order line added successfully:', data);
-      },  
-      error => {  
-        console.error('Error adding sales order line:', error);
+            console.log(purchOrderLines[i]);
+          this.apiService.addPurchOrderLine(purchOrderLines[i]).subscribe(
+            (data:any)=>{
+              console.log('Sales order line added successfully:', data);
+            },  
+            error => {  
+              console.error('Error adding sales order line:', error);
+            }
+          );
+      
+    
+     ///ITEM UPDATE
+  
+    
       }
-    );
-  
-    
-    ///ITEM UPDATE
-  
-    
-  }
   
   
-}, 1000);
+      }, 1000);
 
-this.router.navigate(['/items']);
-    
-
-
+      this.router.navigate(['/items']);
+      
 
 
 
-//CUSTOMER UPDATE
 
-}
+
+
+
+      }
 
   }  
 

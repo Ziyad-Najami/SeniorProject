@@ -1,7 +1,7 @@
 <div *ngIf="this.user_role == 'manager'">
   
   <table class="table table-stripped mt-1 ms-1 ">
-    <thead class="bg-dark h-50">
+    <thead class="bg-secondary h-50">
       <th class="text-white"> ID</th>
       <th class="text-white">Role</th>
       <th class="text-white">User Name</th>
@@ -13,7 +13,7 @@
 
     <tbody>
       <tr *ngFor="let User of Salesman">
-        <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary"> {{User.id}}
+        <td> <a routerLink="SalesmanInsight"> <button type="button" class="btn btn-outline-primary "> {{User.id}}
             </button> </a> </td>
 
         <td>
@@ -117,4 +117,7 @@
       </div>
     </div>
   </div>
+
+  
+
 </div>

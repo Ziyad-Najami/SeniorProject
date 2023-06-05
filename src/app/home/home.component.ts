@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
 
   deleteUser(User: any) {
     this.apiservice.deleteUser(User.id).subscribe(result => {
+      
       this.Salesman = this.Salesman.filter((u: any) => u !== User);
     });
   }

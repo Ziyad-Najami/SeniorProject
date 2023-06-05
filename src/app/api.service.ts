@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.post(this.url+'login.php', { username, password });
   }
   /////////////////////////////////////////////////////////////////////////////////////
-  //////                            Users API                                     /////
+  /////                             Users API                                     /////
   /////////////////////////////////////////////////////////////////////////////////////
   displayUsers()
   {
@@ -28,7 +28,7 @@ export class ApiService {
   }
 
   deleteUser(SalesmanID : any)
-  {console.log(SalesmanID);
+  {
 
     return this.http.delete(this.url+'terminateSalesman.php?id=' + SalesmanID);
   }
